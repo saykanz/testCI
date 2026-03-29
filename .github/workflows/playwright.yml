@@ -29,16 +29,10 @@ jobs:
 
       - name: Run tests
         run: |
-          pytest tests \
-            --tracing=retain-on-failure \
-            --screenshot=only-on-failure \
-            --video=retain-on-failure \
-            --output=test-results \     # 明确指定输出目录（推荐）
-            --verbose
+          pytest tests --tracing=retain-on-failure --screenshot=only-on-failure --video=retain-on-failure --output=test-results --verbose
 
-      # 上传 traces 和 artifacts（无论成功失败都上传）
       - name: Upload test results
-        if: always()                    # 改成 always() 更保险
+        if: always()                    
         uses: actions/upload-artifact@v5
         with:
           name: playwright-test-results
